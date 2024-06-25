@@ -1,0 +1,16 @@
+{
+    "name": "trading",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^1.7.2",
+        "nodemon": "^3.1.4",
+        "socket.io": "^4.7.5"
+    }
+}

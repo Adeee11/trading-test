@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
-// const socket = io("http://localhost:3001"); // Replace with your server URL
-const socket = io("https://trading-backend.duckdns.org/"); 
+const socket = io("http://localhost:3001"); // Replace with your server URL
+// const socket = io("https://trading-backend.duckdns.org/"); 
 
 const Index = () => {
   const [error, setError] = useState({ userErr: "", passErr: "" });
@@ -14,12 +14,17 @@ const Index = () => {
     user: "",
     password: "",
   });
+  const [loading,setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     socket.on("trade", (message) => {
       setMessages(message);
-
-      if (message) setOpenForm(true);
+      console.log("msg",message)
+      if (message) {
+        setReplicateData(message)
+        setLoading(false)  
+        setOpenForm(true);
+      }
     });
     socket.on("signIn", (message) => {
       console.log("signin", message);
@@ -31,6 +36,7 @@ const Index = () => {
   }, []);
 
   const sendMessage = () => {
+    setLoading(true)
     socket.emit("trade", "user_1");
   };
   const signIn = () => {
@@ -62,7 +68,10 @@ const Index = () => {
         <div className="row-start-1  bg-slate-100 px-28 pt-8 w-[500px] h-[auto]" >
           <h1 className="text-center ">YOUR TRADE DETAILS</h1>
           <div className="py-8">
-            {openForm && (
+            {
+              loading?'Trading ...':<></>
+            }
+            {/* {openForm && (
               <div className="w-full max-w-xs">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                   <div className="mb-4">
@@ -115,8 +124,8 @@ const Index = () => {
                   </div>
                 </form>
               </div>
-            )}
-           <p className="overflow-x-auto"> {replicateData !== "" && replicateData}</p>
+            )} */}
+           <p className="overflow-x-auto max-h-96"> {replicateData !== "" && replicateData}</p>
           </div>
         </div>
 

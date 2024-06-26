@@ -4,11 +4,11 @@ const axios = require("axios");
 
 const server = http.createServer((req, res) => {
   // Handle HTTP requests if needed
-  const url = req.url;
-  if (url === '/') {
-    res.write(' Welcome to Home page');
-    res.end();
-}
+//   const url = req.url;
+//   if (url === '/') {
+//     res.write(' Welcome to Home page');
+//     res.end();
+// }
 });
 
 const handleFetch = async (message) => {
@@ -20,14 +20,17 @@ const handleFetch = async (message) => {
 
       headers: {},
     };
-    // const { data } = await axios.request(config);
-    const data = {
-      symbol: "BTCUSD",
-      operation: "Buy",
-      volume: 0.07,
-      takeprofit: 104646,
-      comment: "Blackalgo #47a8d5d2",
-    };
+    const { data } = await axios.request(config);
+
+    console.log("***", data)
+
+    // const data = {
+    //   symbol: "BTCUSD",
+    //   operation: "Buy",
+    //   volume: 0.07,
+    //   takeprofit: 104646,
+    //   comment: "Blackalgo #47a8d5d2",
+    // };
     return data;
   } catch (error) {
     console.log("error.=", error);

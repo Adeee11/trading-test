@@ -4,7 +4,13 @@ const axios = require("axios");
 
 const server = http.createServer((req, res) => {
   // Handle HTTP requests if needed
+  const url = req.url;
+  if (url === '/') {
+    res.write(' Welcome to Home page');
+    res.end();
+}
 });
+
 const handleFetch = async (message) => {
   try {
     let config = {
